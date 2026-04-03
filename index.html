@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alchemico — Pinseria Creativa & Cucina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --near-black: #111111;
+    --charcoal: #1c1c1c;
+    --white: #fafafa;
+    --off-white: #f2f0eb;
+    --chalk: #e8e4dc;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --mid: #888;
+    --light: #ccc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off-white);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN TEXTURE ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    color: rgba(250,250,250,0.6);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav ul a:hover { color: var(--gold); }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 101;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.35s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.98);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+  }
+
+  .nav-drawer.open { opacity: 1; pointer-events: all; }
+
+  .nav-drawer a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-drawer a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    color: var(--white);
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title .accent { color: var(--gold); }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: rgba(250,250,250,0.5);
+    line-height: 1.6;
+    max-width: 340px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    border: 1px solid rgba(201,168,76,0.4);
+    color: rgba(250,250,250,0.6);
+    padding: 0.45rem 1.2rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pill.gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.05);
+    opacity: 0.85;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 30%);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(250,250,250,0.3);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.7), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--off-white);
+    padding: 7rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .about-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--black);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+
+  .about-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .about-card {
+    background: var(--black);
+    color: var(--white);
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .about-card:hover { transform: translateY(-4px); }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .about-card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+
+  .about-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .about-card p {
+    font-size: 0.8rem;
+    color: rgba(250,250,250,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── DIVIDER ── */
+  .chalk-divider {
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: rgba(10,10,10,0.2);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+  }
+
+  /* ── MENU ── */
+  #menu {
+    background: var(--black);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #menu::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .menu-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .menu-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: var(--white);
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+
+  .menu-title span { color: var(--gold); }
+
+  .menu-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: rgba(250,250,250,0.35);
+    font-size: 1rem;
+    margin-top: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* Tab pills */
+  .menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2.5rem auto 3.5rem;
+    max-width: 700px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 100px;
+    padding: 0.4rem;
+    position: relative;
+    z-index: 5;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.7rem 0.8rem;
+    background: transparent;
+    color: rgba(250,250,250,0.4);
+    border: none;
+    cursor: pointer;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 100px;
+    transition: all 0.3s;
+    white-space: nowrap;
+    position: relative;
+    z-index: 6;
+  }
+
+  .tab-btn.active {
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+  }
+
+  .tab-btn:hover:not(.active) {
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .menu-section { display: none; max-width: 1100px; margin: 0 auto; }
+  .menu-section.active { display: block; }
+
+  .menu-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .menu-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    grid-column: 1 / -1;
+  }
+
+  .menu-category { margin-bottom: 2rem; }
+
+  .category-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.7);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .category-name::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.12);
+  }
+
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(250,250,250,0.05);
+  }
+
+  .menu-item:last-child { border-bottom: none; }
+
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .item-name {
+    color: var(--white);
+    font-size: 0.88rem;
+    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .item-price {
+    color: var(--gold);
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .item-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: rgba(250,250,250,0.35);
+    font-size: 0.88rem;
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+
+  /* ── GALLERY ── */
+  #gallery {
+    background: var(--off-white);
+    padding: 6rem 2rem;
+  }
+
+  .gallery-inner { max-width: 1200px; margin: 0 auto; }
+
+  .gallery-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .gallery-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.06em;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .gallery-header h2 span { color: var(--gold); }
+
+  .gallery-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--mid);
+    font-size: 1rem;
+    max-width: 240px;
+    text-align: right;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 260px 260px;
+    gap: 1rem;
+  }
+
+  .photo-card {
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    background: var(--charcoal);
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter: grayscale(15%);
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.07);
+    filter: grayscale(0%);
+  }
+
+  .photo-card.tall { grid-row: span 2; }
+  .photo-card.wide { grid-column: span 2; }
+
+  .photo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .photo-card:hover::after { opacity: 1; }
+
+  /* ── INFO ── */
+  #info {
+    background: var(--black);
+    padding: 5rem 2rem;
+  }
+
+  .info-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .info-block {
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .info-block:hover {
+    border-color: rgba(201,168,76,0.35);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .info-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+  .info-block h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .info-block p {
+    color: rgba(250,250,250,0.5);
+    font-size: 0.88rem;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .info-block a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .info-block a:hover { color: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  footer p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: rgba(250,250,250,0.2);
+  }
+
+  footer span { color: var(--gold); opacity: 0.6; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+    .about-cards { grid-template-columns: 1fr 1fr; }
+    .photo-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .photo-card.tall { grid-row: span 1; height: 220px; }
+    .photo-card.wide { grid-column: span 2; height: 220px; }
+    .photo-card { height: 180px; }
+    .info-inner { grid-template-columns: 1fr; }
+    .gallery-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .gallery-header p { text-align: left; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.4rem; }
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+    .nav-drawer { display: flex; }
+    .menu-columns { grid-template-columns: 1fr; }
+    .menu-tabs { flex-wrap: wrap; border-radius: 16px; max-width: 100%; }
+    .tab-btn { flex: 1 1 40%; border-radius: 12px; font-size: 0.68rem; }
+    .about-cards { grid-template-columns: 1fr; }
+    #gallery { padding: 4rem 1rem; }
+    .photo-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .photo-card, .photo-card.tall, .photo-card.wide { height: 160px; grid-column: span 1; grid-row: span 1; }
+    .photo-card.wide { grid-column: span 2; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ALCHE<span>MICO</span></div>
+  <ul>
+    <li><a href="#about">Il Locale</a></li>
+    <li><a href="#menu">Menù</a></li>
+    <li><a href="#gallery">Galleria</a></li>
+    <li><a href="#info">Info</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <a href="#about" class="drawer-link">Il Locale</a>
+  <a href="#menu" class="drawer-link">Menù</a>
+  <a href="#gallery" class="drawer-link">Galleria</a>
+  <a href="#info" class="drawer-link">Info</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Pinseria Creativa & Cucina · Roma</div>
+    <h1 class="hero-title">ALCHE<span class="accent">MICO</span></h1>
+    <p class="hero-subtitle">Pinsa artigianale, pasta fresca e dolci casarecci in un locale informale dal carattere unico.</p>
+    <div class="hero-pills">
+      <span class="pill gold">Pinse Alchemiche</span>
+      <span class="pill">Pasta Artigianale</span>
+      <span class="pill">Dolci Casarecci</span>
+      <span class="pill">Fried Bubble</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image12.jpeg" alt="Pinse dal forno">
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scorri</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="section-label">Chi siamo</div>
+    <h2 class="about-title">CUCINA CHE TRASFORMA</h2>
+    <p class="about-text">
+      Alchemico nasce dall'idea che il cibo possa essere trasformazione. Un locale informale, con pareti bianche, piastrelle e legno, dove ogni piatto racconta una storia di ricerca e creatività.
+    </p>
+    <p class="about-text">
+      Le nostre pinse hanno nomi di alchimisti e filosofi. La pasta è tirata a mano ogni giorno. I dolci sono casarecci, veri. Benvenuto in un posto dove mangiare è un'esperienza.
+    </p>
+  </div>
+  <div class="about-cards">
+    <div class="about-card">
+      <div class="about-card-icon">🔥</div>
+      <h4>Forno a Legna</h4>
+      <p>Ogni pinsa cotta nel nostro forno a legna, impasto a lunga lievitazione</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🌿</div>
+      <h4>Ingredienti DOP</h4>
+      <p>Mozzarella di bufala, alici del Cantabrico, pistacchio di Bronte IGP</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🍝</div>
+      <h4>Pasta Fresca</h4>
+      <p>Pasta artigianale tirata ogni giorno, ricette della tradizione romana</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🍮</div>
+      <h4>Dolci Casarecci</h4>
+      <p>Crumble, pannacotta, tiramisù — fatti come a casa, meglio di casa</p>
+    </div>
+  </div>
+</section>
+
+<div class="chalk-divider">· · · ✦ · · ·</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <div class="section-label" style="justify-content:center; color:rgba(201,168,76,0.7);">Da noi</div>
+    <h2 class="menu-title">IL NOSTRO <span>MENÙ</span></h2>
+    <p class="menu-note">Ingredienti freschi · Ricette creative · Ogni giorno diverso</p>
+  </div>
+
+  <div class="menu-tabs">
+    <button class="tab-btn active" data-tab="pinse">🍕 Pinse</button>
+    <button class="tab-btn" data-tab="fritti">🫧 Fritti</button>
+    <button class="tab-btn" data-tab="pasta">🍝 Pasta</button>
+    <button class="tab-btn" data-tab="dolci">🍮 Dolci</button>
+    <button class="tab-btn" data-tab="bevande">🍷 Bevande</button>
+  </div>
+
+  <!-- PINSE -->
+  <div id="tab-pinse" class="menu-section active">
+    <div class="menu-columns">
+      <div class="menu-col-title">Pinse Alchemiche</div>
+
+      <div class="menu-category">
+        <div class="category-name">Pinse Eterne</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Rossa</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Marinara</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Margherita</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Funghi</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Ortolana</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Napoli</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Fiori di Zucca e Alici</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Carbonara</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Angeli e Demoni</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Boscaiola</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Margherita con Crudo</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Bufala DOP e Pachino</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">La Tartufata</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Margherita con Bufala DOP</span></div></div>
+      </div>
+
+      <div class="menu-category">
+        <div class="category-name">Pinse Alchemiche — Pizza 'na Via de Mezzo</div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Nicola Flamel</span></div>
+          <span class="item-desc">Corbarino confit, capperi di Salina, olive Tagiasche, aglio rosso, origano selvatico, basilico</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pico della Mirandola</span></div>
+          <span class="item-desc">Pancetta croccante, Pecorino Romano DOP, Mozzarella di Bufala</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Giotti d'India</span></div>
+          <span class="item-desc">Crema di luca, fior di latte, salsiccia di Norcia, stracciatella di Andria, prezzemolo, pepe nero</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Robert Fludd</span></div>
+          <span class="item-desc">Zucchine, cipolla rossa, provola affumicata, filetti di tonno, Mozzarella di Bufala, basilico</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Giacomo Casanova</span></div>
+          <span class="item-desc">Marzanino, Mozzarella di Bufala, alici del Cantabrico, origano selvatico, basilico</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Basile Valentin</span></div>
+          <span class="item-desc">Friarielli, capperi di Salina, olive Tagiasche, uvetta candita, alici del Cantabrico, fior di latte</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Elia da Cortona</span></div>
+          <span class="item-desc">Fior di latte, guanciale di Amatrice, Mela Smith, Pecorino Romano, zeste di limone, prezzemolo</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Giuliano Kremmerz</span></div>
+          <span class="item-desc">Radicchio Trevigiano, fior di latte, speck Alto Adige, formaggio erborinato, pere, zeste d'arancia, prezzemolo</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Bonaventura da Iseo</span></div>
+          <span class="item-desc">Pecorino Romano, crema di zucca allo zenzero, polvere di caffè, fior di latte, pancetta, provola affumicata, prezzemolo</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Alberto Magno</span></div>
+          <span class="item-desc">Marzanino, Bufala DOP, pesto di basilico</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pietro Bono</span></div>
+          <span class="item-desc">Pecorino Romano, Bufala DOP, guanciale, pesto di pistacchio di Bronte salato al pepe nero, pomodorino confit</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <div class="menu-columns">
+        <div class="menu-col-title">Le Focacce</div>
+        <div class="menu-category">
+          <div class="menu-item"><div class="item-row"><span class="item-name">Focaccia Bianca con Spezie Varie</span></div></div>
+          <div class="menu-item">
+            <div class="item-row"><span class="item-name">Carpaccio</span></div>
+            <span class="item-desc">Rughetta, bresaola, Parmigiano, mousse di formaggi freschi</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-row"><span class="item-name">Prosciutto</span></div>
+            <span class="item-desc">Rughetta, Prosciutto Amatriciano IGP, mousse di formaggi freschi</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-row"><span class="item-name">Mortazza</span></div>
+            <span class="item-desc">Mortadella, quenelle di formaggi freschi, pistacchio</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-row"><span class="item-name">Primavera</span></div>
+            <span class="item-desc">Rughetta, pomodorini, olive, bufala</span>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRITTI -->
+  <div id="tab-fritti" class="menu-section">
+    <div class="menu-columns">
+      <div class="menu-col-title">Fried Bubble & I Nostri Fritti</div>
+      <div class="menu-category">
+        <div class="category-name">Fried Bubble</div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pomodoro San Marzano, Caponata, Guanciale, Basilico e Burrata</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pomodoro San Marzano, Burrata, Alici di Cetara, Pomodori Secchi</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Stracciatella, Mortadella, Crema di Pistacchio, Granella di Pistacchio di Bronte</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Chips di Patate Cacio e Pepe</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Olive Ascolane al Ciauscolo di Visso IGP</span><span class="item-price">5 pz</span></div>
+        </div>
+      </div>
+      <div class="menu-category">
+        <div class="category-name">I Nostri Fritti</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Supplì al Ragù di Scottona</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Supplì alla Carbonara di Spaghetti</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Supplì in Burro e Spiga</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Supplì di Buciini Cacio e Pepe</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Supplì al Nero di Seppia, Pecorino Romano e Lime</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Crocchette di Patate con Provola e Guanciale Secchi</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Crocchette di Patate di Mezzano e Ricotta di Pecora IGP</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Frittella in Carrozza, Ricotta di Pecora e Bufala</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASTA -->
+  <div id="tab-pasta" class="menu-section">
+    <div class="menu-columns">
+      <div class="menu-col-title">Pasta Artigianale</div>
+      <div class="menu-category">
+        <div class="category-name">Primi della Tradizione</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Spaghetti Cacio e Pepe</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Rigatoni all'Amatriciana</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Spaghetti alla Carbonara</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Pasta alla Gricia</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Tonnarelli Cacio e Pepe Classici</span></div></div>
+      </div>
+      <div class="menu-category">
+        <div class="category-name">Creazioni Alchemiche</div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pasta al Pistacchio di Bronte</span></div>
+          <span class="item-desc">Con crema di pistacchio IGP e guanciale</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Linguine allo Scoglio</span></div>
+          <span class="item-desc">Frutti di mare freschi, pomodorino e basilico</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pasta al Ragù Bianco</span></div>
+          <span class="item-desc">Scottona, verdure di stagione</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOLCI -->
+  <div id="tab-dolci" class="menu-section">
+    <div class="menu-columns">
+      <div class="menu-col-title">Dolci e Frutta</div>
+      <div class="menu-category">
+        <div class="category-name">I Nostri Dolci</div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Cheesecake</span><span class="item-price">€ 6,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Zoccolette di Pinsa con Nutella e Zucchero a Velo</span><span class="item-price">€ 5,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Crumble al Cioccolato "Domoni"</span><span class="item-price">€ 6,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Crumble al Pistacchio di Bronte</span><span class="item-price">€ 6,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Tiramisù Classico</span><span class="item-price">€ 5,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pannacotta ai Frutti di Bosco</span><span class="item-price">€ 5,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Pannacotta al Cioccolato</span><span class="item-price">€ 5,00</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Tris di Cicchetti Alchemici</span><span class="item-price">€ 6,00</span></div>
+          <span class="item-desc">Crumble, Tiramisù, Pannacotta</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Tortino con Cuore Caldo di Cioccolato e Crema</span><span class="item-price">€ 6,00</span></div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- BEVANDE -->
+  <div id="tab-bevande" class="menu-section">
+    <div class="menu-columns">
+      <div class="menu-col-title">Bevande</div>
+      <div class="menu-category">
+        <div class="category-name">Acqua & Soft Drink</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Acqua Microfiltrata</span><span class="item-desc">bottiglie in vetro</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Soft Drink</span><span class="item-desc">Coca Cola / Coca Cola Zero</span></div></div>
+      </div>
+      <div class="menu-category">
+        <div class="category-name">Birre</div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Forst Kronen Chiara</span></div>
+          <span class="item-desc">Piccola 0,2 cl · Media 0,4 cl</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Forst Sixtus Rossa</span></div>
+          <span class="item-desc">Piccola 0,2 cl · Media 0,4 cl</span>
+        </div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Ichnusa Non Filtrata</span></div></div>
+        <div class="menu-item">
+          <div class="item-row"><span class="item-name">Birra del Borgo Gran Riserva Rossa</span></div>
+          <span class="item-desc">Lager-Lisa 0,5 cl</span>
+        </div>
+      </div>
+      <div class="menu-category">
+        <div class="category-name">Vini Bianchi</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Gewürztraminer</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Müller-Thurgau</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Pecorino DOCG</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Frascati Superiore / Frascati</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Inzolia (Greppetto Siciliano)</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Grechetto Poggio Belvedere</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Grechetto</span></div></div>
+      </div>
+      <div class="menu-category">
+        <div class="category-name">Vini Rossi</div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Cesanese del Piglio</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Syrah</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Montepulciano d'Abruzzo</span></div></div>
+        <div class="menu-item"><div class="item-row"><span class="item-name">Nero d'Avola</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <div>
+        <div class="section-label">Le nostre foto</div>
+        <h2 class="about-title">DAL FORNO <span style="color:var(--gold)">ALLA</span> TAVOLA</h2>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--mid); font-size:1rem;">Ogni piatto è un'opera, ogni visita un ricordo.</p>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-card tall">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image16.jpeg" alt="Chef prepara la pinsa">
+      </div>
+      <div class="photo-card wide">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image12.jpeg" alt="Pinse dal forno a legna">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image9.jpeg" alt="Antipasto creativo">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image10.jpeg" alt="Pinsa con tonno e zucchine">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image8.jpeg" alt="Tonnarelli cacio e pepe">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image7.jpeg" alt="Dolce alchemico">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image11.jpeg" alt="Pinsa con alici e burrata">
+      </div>
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/jajopelliccione-netizen/Sito/main/image14.jpeg" alt="Supplì alchemico">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <div class="info-inner">
+    <div class="info-block">
+      <span class="info-icon">📍</span>
+      <h3>Dove Siamo</h3>
+      <p>Roma<br><br><a href="https://maps.google.com" target="_blank">Aprire in Maps →</a></p>
+    </div>
+    <div class="info-block">
+      <span class="info-icon">🕐</span>
+      <h3>Orari</h3>
+      <p>Martedì – Domenica<br>12:30 – 15:00<br>19:30 – 23:00<br><br>Lunedì chiuso</p>
+    </div>
+    <div class="info-block">
+      <span class="info-icon">📞</span>
+      <h3>Prenota</h3>
+      <p>Consigliamo la prenotazione per il weekend.<br><br><a href="tel:+39000000000">Chiama ora →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>ALCHEMICO</span> — Pinseria Creativa & Cucina · Roma</p>
+</footer>
+
+<script>
+  // HAMBURGER
+  var hamburger = document.getElementById('hamburger');
+  var drawer = document.getElementById('drawer');
+
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.drawer-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // TABS
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tab = this.getAttribute('data-tab');
+      document.querySelectorAll('.menu-section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('tab-' + tab).classList.add('active');
+      this.classList.add('active');
+    });
+  });
+
+  // FADE IN
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.about-card, .photo-card, .info-block').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
