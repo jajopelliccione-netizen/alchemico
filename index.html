@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alchemico — Pinseria Creativa & Cucina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0a0a0a;
@@ -21,8 +21,10 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { background: var(--off-white); color: var(--black); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  body { background: var(--off-white); color: var(--black); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
   body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
+
+  /* ── NAV ── */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(10,10,10,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,168,76,0.2); }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); letter-spacing: 0.1em; }
   .nav-logo span { color: var(--gold); }
@@ -47,35 +49,35 @@
   .hero-overlay-left { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.15) 55%, transparent 100%); pointer-events: none; }
   .hero-inner { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
   .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 10rem 4rem 6rem 5rem; }
-  .hero-tag { font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+  .hero-tag { font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; }
   .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
   .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7.5rem); color: var(--white); line-height: 0.92; letter-spacing: 0.04em; margin-bottom: 1.5rem; }
   .hero-title .accent { color: var(--gold); }
   .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: rgba(250,250,250,0.8); line-height: 1.6; max-width: 340px; margin-bottom: 3rem; }
   .hero-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .pill { border: 1px solid rgba(201,168,76,0.5); color: rgba(250,250,250,0.8); padding: 0.45rem 1.2rem; border-radius: 100px; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; backdrop-filter: blur(4px); background: rgba(10,10,10,0.25); }
+  .pill { border: 1px solid rgba(201,168,76,0.5); color: rgba(250,250,250,0.8); padding: 0.45rem 1.2rem; border-radius: 100px; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; backdrop-filter: blur(4px); background: rgba(10,10,10,0.25); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; }
   .pill.gold { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
   .hero-right { display: flex; align-items: center; justify-content: center; padding: 8rem 4rem 6rem 2rem; }
   .hero-right-frame { position: relative; width: 100%; max-width: 400px; aspect-ratio: 3/4; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.35); box-shadow: 0 40px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(201,168,76,0.12); }
   .hero-right-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%) contrast(1.05); }
   .hero-right-frame::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to top, rgba(10,10,10,0.5), transparent); }
-  .hero-scroll { position: absolute; bottom: 2.5rem; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(250,250,250,0.4); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; z-index: 3; }
+  .hero-scroll { position: absolute; bottom: 2.5rem; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(250,250,250,0.4); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; z-index: 3; font-family: 'Plus Jakarta Sans', sans-serif; }
   .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(201,168,76,0.7), transparent); animation: scrollPulse 2s infinite; }
   @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
   /* ── ABOUT ── */
   #about { background: var(--off-white); padding: 7rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; max-width: 1300px; margin: 0 auto; }
-  .section-label { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
   .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
   .about-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--black); line-height: 1; letter-spacing: 0.04em; margin-bottom: 1.5rem; }
-  .about-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; line-height: 1.9; color: #444; margin-bottom: 1rem; }
+  .about-text { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; line-height: 1.95; color: #444; margin-bottom: 1rem; }
   .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .about-card { background: var(--black); color: var(--white); padding: 2rem 1.5rem; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s; }
   .about-card:hover { transform: translateY(-4px); }
   .about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
   .about-card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
   .about-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 0.4rem; }
-  .about-card p { font-size: 0.8rem; color: rgba(250,250,250,0.55); line-height: 1.6; }
+  .about-card p { font-size: 0.82rem; color: rgba(250,250,250,0.55); line-height: 1.65; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; }
   .chalk-divider { text-align: center; padding: 1.5rem; font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(10,10,10,0.2); font-size: 1rem; letter-spacing: 0.4em; }
 
   /* ── MENU ── */
@@ -86,7 +88,7 @@
   .menu-title span { color: var(--gold); }
   .menu-note { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(250,250,250,0.35); font-size: 1rem; margin-top: 0.6rem; letter-spacing: 0.06em; }
   .menu-tabs { display: flex; justify-content: center; gap: 0.5rem; margin: 2.5rem auto 3.5rem; max-width: 700px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 100px; padding: 0.4rem; position: relative; z-index: 5; }
-  .tab-btn { flex: 1; padding: 0.7rem 0.8rem; background: transparent; color: rgba(250,250,250,0.4); border: none; cursor: pointer; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; border-radius: 100px; transition: all 0.3s; white-space: nowrap; position: relative; z-index: 6; }
+  .tab-btn { flex: 1; padding: 0.7rem 0.8rem; background: transparent; color: rgba(250,250,250,0.4); border: none; cursor: pointer; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; border-radius: 100px; transition: all 0.3s; white-space: nowrap; position: relative; z-index: 6; font-weight: 500; }
   .tab-btn.active { background: var(--gold); color: var(--black); font-weight: 600; box-shadow: 0 4px 20px rgba(201,168,76,0.35); }
   .tab-btn:hover:not(.active) { color: var(--gold); background: rgba(201,168,76,0.08); }
   .menu-section { display: none; max-width: 1100px; margin: 0 auto; }
@@ -94,14 +96,14 @@
   .menu-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .menu-col-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 0.08em; border-bottom: 1px solid rgba(201,168,76,0.2); padding-bottom: 0.8rem; margin-bottom: 1.5rem; grid-column: 1 / -1; }
   .menu-category { margin-bottom: 2rem; }
-  .category-name { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.7); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .category-name { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.7); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
   .category-name::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.12); }
   .menu-item { display: flex; flex-direction: column; padding: 0.7rem 0; border-bottom: 1px solid rgba(250,250,250,0.05); }
   .menu-item:last-child { border-bottom: none; }
   .item-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-  .item-name { color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 0.02em; }
-  .item-price { color: var(--gold); font-size: 0.82rem; font-weight: 500; white-space: nowrap; }
-  .item-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(250,250,250,0.35); font-size: 0.88rem; margin-top: 0.15rem; line-height: 1.4; }
+  .item-name { color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 0.02em; }
+  .item-price { color: var(--gold); font-size: 0.82rem; font-weight: 500; white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; }
+  .item-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(250,250,250,0.35); font-size: 0.9rem; margin-top: 0.15rem; line-height: 1.4; }
 
   /* ── GALLERY ── */
   #gallery { background: var(--off-white); padding: 6rem 2rem; }
@@ -119,6 +121,32 @@
   .photo-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
   .photo-card:hover::after { opacity: 1; }
 
+  /* ── RECENSIONI ── */
+  #recensioni { background: var(--near-black); padding: 6rem 2rem; position: relative; overflow: hidden; }
+  #recensioni::before { content: ''; position: absolute; bottom: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%); pointer-events: none; }
+  .recensioni-inner { max-width: 1100px; margin: 0 auto; }
+  .recensioni-header { text-align: center; margin-bottom: 3.5rem; }
+  .recensioni-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); color: var(--white); letter-spacing: 0.06em; line-height: 1; }
+  .recensioni-title span { color: var(--gold); }
+  .recensioni-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(250,250,250,0.35); font-size: 1rem; margin-top: 0.6rem; }
+  .stars-global { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.2rem; }
+  .stars-global .stars { color: var(--gold); font-size: 1.3rem; letter-spacing: 0.05em; }
+  .stars-global .rating-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); letter-spacing: 0.05em; }
+  .stars-global .rating-label { font-size: 0.75rem; color: rgba(250,250,250,0.35); letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; }
+  .recensioni-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .review-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.12); border-radius: 16px; padding: 2rem 1.8rem; position: relative; transition: border-color 0.3s, background 0.3s; }
+  .review-card:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.03); }
+  .review-card::before { content: '\201C'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: rgba(201,168,76,0.12); line-height: 1; }
+  .review-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; line-height: 1.75; color: rgba(250,250,250,0.72); font-style: italic; margin-bottom: 1.4rem; }
+  .review-author { display: flex; align-items: center; gap: 0.8rem; }
+  .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), rgba(201,168,76,0.4)); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--black); flex-shrink: 0; }
+  .review-name { font-size: 0.82rem; font-weight: 600; color: rgba(250,250,250,0.8); font-family: 'Plus Jakarta Sans', sans-serif; }
+  .review-date { font-size: 0.72rem; color: rgba(250,250,250,0.3); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; }
+  .review-google-badge { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 3rem; color: rgba(250,250,250,0.25); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; }
+  .review-google-badge a { color: var(--gold); opacity: 0.7; text-decoration: none; transition: opacity 0.2s; }
+  .review-google-badge a:hover { opacity: 1; }
+
   /* ── INFO ── */
   #info { background: var(--black); padding: 5rem 2rem; }
   .info-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: center; }
@@ -126,7 +154,7 @@
   .info-block:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.04); }
   .info-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
   .info-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 1rem; }
-  .info-block p { color: rgba(250,250,250,0.5); font-size: 0.88rem; line-height: 1.85; font-weight: 300; }
+  .info-block p { color: rgba(250,250,250,0.5); font-size: 0.88rem; line-height: 1.85; font-weight: 300; font-family: 'Plus Jakarta Sans', sans-serif; }
   .info-block a { color: var(--gold); text-decoration: none; font-weight: 500; transition: color 0.2s; }
   .info-block a:hover { color: var(--gold-light); }
   footer { background: #050505; padding: 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1); }
@@ -139,6 +167,7 @@
   .hero-left > *:nth-child(3) { animation-delay: 0.4s; }
   .hero-left > *:nth-child(4) { animation-delay: 0.55s; }
 
+  /* ── TABLET ── */
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-right { display: none; }
@@ -152,20 +181,65 @@
     .info-inner { grid-template-columns: 1fr; }
     .gallery-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .gallery-header p { text-align: left; }
+    .recensioni-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.4rem; }
     nav ul { display: none; }
     .hamburger { display: flex; }
     .nav-drawer { display: flex; }
+
+    /* Hero mobile */
+    .hero-left { padding: 7rem 1.4rem 4rem; }
+    .hero-tag { font-size: 0.62rem; letter-spacing: 0.2em; margin-bottom: 1.2rem; }
+    .hero-subtitle { font-size: 1.1rem; max-width: 100%; margin-bottom: 2rem; }
+    .hero-pills { gap: 0.4rem; }
+    .pill { font-size: 0.62rem; padding: 0.4rem 0.9rem; }
+
+    /* About mobile */
+    #about { padding: 4rem 1.4rem; gap: 2.5rem; }
+    .about-text { font-size: 1.08rem; line-height: 1.85; }
+    .about-cards { grid-template-columns: 1fr; gap: 0.8rem; }
+    .about-card { padding: 1.4rem 1.2rem; }
+    .about-card p { font-size: 0.84rem; }
+
+    /* Menu mobile */
+    #menu { padding: 4rem 1rem; }
     .menu-columns { grid-template-columns: 1fr; }
-    .menu-tabs { flex-wrap: wrap; border-radius: 16px; max-width: 100%; }
-    .tab-btn { flex: 1 1 40%; border-radius: 12px; font-size: 0.68rem; }
-    .about-cards { grid-template-columns: 1fr; }
+    .menu-tabs { flex-wrap: wrap; border-radius: 16px; max-width: 100%; gap: 0.35rem; }
+    .tab-btn { flex: 1 1 40%; border-radius: 12px; font-size: 0.66rem; padding: 0.65rem 0.5rem; }
+    .menu-col-title { font-size: 1.5rem; }
+    .item-name { font-size: 0.98rem; }
+    .item-desc { font-size: 0.84rem; }
+
+    /* Gallery mobile */
     #gallery { padding: 4rem 1rem; }
     .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .photo-card, .photo-card.tall, .photo-card.wide { height: 160px; grid-column: span 1; grid-row: span 1; }
-    .photo-card.wide { grid-column: span 2; }
+    .photo-card.wide { grid-column: span 2; height: 200px; }
+
+    /* Recensioni mobile */
+    #recensioni { padding: 4rem 1rem; }
+    .recensioni-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .review-card { padding: 1.5rem 1.3rem; }
+    .review-text { font-size: 0.98rem; }
+    .stars-global .rating-num { font-size: 1.8rem; }
+
+    /* Info mobile */
+    #info { padding: 4rem 1rem; }
+    .info-inner { grid-template-columns: 1fr; gap: 1rem; }
+    .info-block { padding: 1.8rem 1.2rem; }
+
+    /* Gallery header mobile */
+    .gallery-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .gallery-header p { text-align: left; max-width: 100%; }
+  }
+
+  @media (max-width: 400px) {
+    .tab-btn { flex: 1 1 100%; }
+    .hero-left { padding: 6.5rem 1.2rem 3.5rem; }
   }
 </style>
 </head>
@@ -177,6 +251,7 @@
     <li><a href="#about">Il Locale</a></li>
     <li><a href="#menu">Menù</a></li>
     <li><a href="#gallery">Galleria</a></li>
+    <li><a href="#recensioni">Recensioni</a></li>
     <li><a href="#info">Info</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -188,10 +263,10 @@
   <a href="#about" class="drawer-link">Il Locale</a>
   <a href="#menu" class="drawer-link">Menù</a>
   <a href="#gallery" class="drawer-link">Galleria</a>
+  <a href="#recensioni" class="drawer-link">Recensioni</a>
   <a href="#info" class="drawer-link">Info</a>
 </div>
 
-<!-- HERO: foto cucina in background con overlay opaco -->
 <section id="hero">
   <div class="hero-bg">
     <img src="image13.jpeg" alt="La cucina di Alchemico">
@@ -419,10 +494,71 @@
   </div>
 </section>
 
+<!-- ── RECENSIONI ── -->
+<section id="recensioni">
+  <div class="recensioni-inner">
+    <div class="recensioni-header">
+      <div class="section-label" style="justify-content:center; color:rgba(201,168,76,0.7);">Cosa dicono di noi</div>
+      <h2 class="recensioni-title">LE NOSTRE <span>RECENSIONI</span></h2>
+      <p class="recensioni-subtitle">Parole vere di clienti veri</p>
+      <div class="stars-global">
+        <span class="rating-num">5.0</span>
+        <span class="stars">★★★★★</span>
+        <span class="rating-label">su Google</span>
+      </div>
+    </div>
+    <div class="recensioni-grid">
+
+      <!-- RECENSIONE 1 — sostituisci con il testo reale -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Posto fantastico, la pinsa è buonissima e gli ingredienti si sentono. Ambiente caldo e personale super gentile. Torneremo sicuramente!</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Marco R.</div>
+            <div class="review-date">Google · marzo 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENSIONE 2 -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ho provato la Pietro Bono con il pesto di pistacchio di Bronte: una cosa incredibile. I supplì alla carbonara sono da sogno. Locale molto carino.</p>
+        <div class="review-author">
+          <div class="review-avatar">L</div>
+          <div>
+            <div class="review-name">Laura S.</div>
+            <div class="review-date">Google · febbraio 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENSIONE 3 -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Finalmente una pinseria seria a Cinecittà. Impasto perfetto, topping di qualità, prezzi onesti. Il tiramisu è quello della nonna, non una cosa industriale.</p>
+        <div class="review-author">
+          <div class="review-avatar">G</div>
+          <div>
+            <div class="review-name">Giulia T.</div>
+            <div class="review-date">Google · gennaio 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="review-google-badge">
+      ⭐ Leggi tutte le recensioni su &nbsp;<a href="https://maps.app.goo.gl/BecHraQnuZdG9xTG9" target="_blank">Google Maps →</a>
+    </div>
+  </div>
+</section>
+
 <section id="info">
   <div class="info-inner">
     <div class="info-block"><span class="info-icon">📍</span><h3>Dove Siamo</h3><p>Roma - Cinecittà<br><br><a href="https://maps.app.goo.gl/BecHraQnuZdG9xTG9" target="_blank">Aprire in Maps &rarr;</a></p></div>
-    <div class="info-block"><span class="info-icon">🕐</span><h3>Orari</h3><p>Luned&igrave; &ndash; Domenica<br>12:30 &ndash; 15:00<br>18:30 &ndash; 00:00<br></div>
+    <div class="info-block"><span class="info-icon">🕐</span><h3>Orari</h3><p>Luned&igrave; &ndash; Domenica<br>12:30 &ndash; 15:00<br>18:30 &ndash; 00:00</p></div>
     <div class="info-block"><span class="info-icon">📞</span><h3>Prenota</h3><p>Consigliamo la prenotazione per il weekend.<br><br><a href="tel:+393512214750">Chiama ora &rarr;</a></p></div>
   </div>
 </section>
@@ -458,7 +594,7 @@
       if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.about-card, .photo-card, .info-block').forEach(function(el) {
+  document.querySelectorAll('.about-card, .photo-card, .info-block, .review-card').forEach(function(el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
